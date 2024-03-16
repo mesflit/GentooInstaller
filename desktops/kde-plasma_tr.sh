@@ -4,11 +4,11 @@
 
 # Root erişimini kontrol et
 if [ "$(id -u)" -ne 0 ]; then
-  echo "You need root privileges to run this script."
+  echo "Bu scripti çalıştırmak için root yetkilerine ihtiyacınız var."
   exit 1
 fi
 
-echo "If you want to install KDE Plasma, please wait for 15 seconds."
+echo "KDE plasma kurmak istiyorsanız lütfen 15 saniye bekleyin"
 sleep 15
 
 # make.conf dosyasında var olan USE satırını alıp değişkene atayın
@@ -27,32 +27,32 @@ echo ">=kde-plasma/kwin-5.27.11 lock
 >=kde-frameworks/kitemmodels-5.115.0 qml" | sudo tee -a /etc/portage/package.use/plasma
 
 clear
-read -p "Enter your username: " USERNAME
+read -p "Kullanıcı adınızı girin: " USERNAME
 gpasswd -a ${USERNAME} video
 clear
-echo "Starting KDE installation..."
+echo "KDE kurulumu başlatılıyor..."
 
 sudo emerge --sync
 sudo emerge -uDN @world
 sudo emerge kde-plasma/plasma-meta
 
 # KDE Apps isteğe bağlı olarak indir
-read -p "Would you like to install KDE applications? (Y/N): " CHOICE_KAPPS
-if [[ "${CHOICE_KAPPS^^}" == "Y" ]]; then
+read -p "KDE uygulamalarını kurmak istiyor musunuz? (E/H): " CHOICE_KAPPS
+if [[ "${CHOICE_KAPPS^^}" == "E" ]]; then
     sudo emerge kde-apps/kde-apps-meta
-    echo "KDE applications have been installed."
+    echo "KDE uygulamaları kuruldu."
 else
-    echo "KDE applications were not installed."
+    echo "KDE uygulamaları kurulmadı."
 fi
 
 # SDDM'yi isteğe bağlı olarak indir
-read -p "Would you like to install SDDM? (Y/N):" CHOICE_SDDM
-if [[ "${CHOICE_SDDM^^}" == "Y" ]]; then
+read -p "SDDM'yi kurmak istiyor musunuz? (E/H): " CHOICE_SDDM
+if [[ "${CHOICE_SDDM^^}" == "E" ]]; then
     sudo emerge x11-misc/sddm
     sudo 
-    echo "SDDM has been installed."
+    echo "SDDM kuruldu."
 else
-    echo "SDDM was not installed."
+    echo "SDDM kurulmadı."
 fi
 
 # SDDM ayarları
