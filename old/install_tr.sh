@@ -72,7 +72,7 @@ chronyd -q
 
 # Temel sistem kurulumu
 echo "Temel sistem kuruluyor..."
-wget https://distfiles.gentoo.org/releases/amd64/autobuilds/current-stage3-amd64-desktop-openrc/stage3-amd64-desktop-openrc-*.tar.xz -O /mnt/gentoo/stage3.tar.xz
+wget ${GENTOO_BASE} -O /mnt/gentoo/stage3.tar.xz
 tar xpvf /mnt/gentoo/stage3.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo/
 rm /mnt/gentoo/stage3.tar.xz
 
